@@ -10,30 +10,66 @@ listContainer.appendChild(checkInHeader);
 
 
 let numberList = document.createElement("ol");
+numberList.setAttribute("id", "lista");
 listContainer.appendChild(numberList);
 
-//let queueArray = [];
+let queueArray = [];
+let queueList2 = document.getElementById("lista");
+
+if (queueArray.length === 0){
+    let empty = document.createElement("p");
+    empty.innerText = "There’s currently no people standing in line";
+    checkInHeader.appendChild(empty);
+}
 
 queueButton.addEventListener("click",()=> {
-    //queueArray.push(inputValue.value);
-    let queueList = document.createElement("li");
-    queueList.innerText = inputValue.value;
-    numberList.appendChild(queueList);
-    inputValue.value = "";
+    if (document.getElementById("inputName").value.length == 0) {
+        alert("Empty");
+    } else if (checkInHeader.children.length > 0) {
+        emptyElement = document.querySelector("p");
+        checkInHeader.removeChild(emptyElement);
+        queueArray.push(inputValue.value);
+        let queueList = document.createElement("li");
+        queueList.innerText = inputValue.value;
+        numberList.appendChild(queueList);
+        inputValue.value = "";
+    }
+        else {
+        queueArray.push(inputValue.value);
+        let queueList = document.createElement("li");
+        queueList.innerText = inputValue.value;
+        numberList.appendChild(queueList);
+        inputValue.value = "";
+    }
 })
 
 fastTrackButton.addEventListener("click", ()=> {
-    //queueArray.unshift(inputValue.value);
-    let queueList = document.createElement("li");
-    queueList.innerText = inputValue.value;
-    numberList.prepend(queueList);
-    inputValue.value = "";
-    //console.log(queueArray);
+    if (document.getElementById("inputName").value.length == 0) {
+        alert("Empty");
+    } else if (checkInHeader.children.length > 0) {
+        emptyElement = document.querySelector("p");
+        checkInHeader.removeChild(emptyElement);
+        queueArray.unshift(inputValue.value);
+        let queueList = document.createElement("li");
+        queueList.innerText = inputValue.value;
+        numberList.prepend(queueList);
+        inputValue.value = "";
+    } else {
+        queueArray.unshift(inputValue.value);
+        let queueList = document.createElement("li");
+        queueList.innerText = inputValue.value;
+        numberList.prepend(queueList);
+        inputValue.value = "";
+    }
 })
 
 checkInButton.addEventListener("click", ()=> {
-    //queueArray.shift();
+    queueArray.shift();
     let firstElement = document.querySelector("li")
     numberList.removeChild(firstElement);
+    if (queueArray.length === 0){
+        let empty = document.createElement("p");
+        empty.innerText = "There’s currently no people standing in line";
+        checkInHeader.appendChild(empty);
+    }
 })
-
