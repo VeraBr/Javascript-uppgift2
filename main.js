@@ -1,30 +1,25 @@
 // Variabler för alla element i HTML filen.
 let queueButton = document.querySelector("#standInLine");
 let fastTrackButton = document.querySelector("#fastTrack");
-let checkInButton = document.querySelector("#checkedIn")
-let listContainer = document.querySelector("#container");
+let checkInButton = document.querySelector("#checkIn");
 let inputValue = document.querySelector("#inputName");
-
-// Skapar incheckningskö-rubriken.
-let checkInHeader = document.createElement("h2");
-checkInHeader.innerText = "Incheckningskö";
-listContainer.appendChild(checkInHeader);
+let queueOfPeople = document.querySelector("#queue");
 
 // Skapar ol element för incheckningskön.
 let numberList = document.createElement("ol");
-listContainer.appendChild(numberList);
+queueOfPeople.appendChild(numberList);
 
-// Skriver ut att kön är tom från början.
-let empty = document.createElement("p");
-empty.innerText = "Just nu står ingen person i kö.";
-checkInHeader.appendChild(empty);
+// Skriver ut att kön är tom från början. 
+let emptyQueue = document.createElement("p");
+emptyQueue.innerText = "Just nu står ingen person i kö.";
+queueOfPeople.appendChild(emptyQueue);
 
 
 queueButton.addEventListener("click",()=> {
     if (!document.getElementById("inputName").value.trim().length) { //Undviker att inputfältet lämnas tomt.
         alert("Rutan får inte lämnas tom");
     } else {
-        empty.innerText = "";
+        emptyQueue.innerText = "";
         let queueList = document.createElement("li");
         queueList.innerText = inputValue.value;
         numberList.appendChild(queueList);
@@ -36,7 +31,7 @@ fastTrackButton.addEventListener("click", ()=> {
     if (!document.getElementById("inputName").value.trim().length) {
         alert("Rutan får inte lämnas tom");
     } else {
-        empty.innerText = "";
+        emptyQueue.innerText = "";
         let queueList = document.createElement("li");
         queueList.innerText = inputValue.value;
         numberList.prepend(queueList);
@@ -48,6 +43,6 @@ checkInButton.addEventListener("click", ()=> {
     let firstElement = document.querySelector("li")
     numberList.removeChild(firstElement);
     if (numberList.children.length === 0){
-        empty.innerText = "Just nu står ingen person i kö.";
+        emptyQueue.innerText = "Just nu står ingen person i kö.";
     }
 })
